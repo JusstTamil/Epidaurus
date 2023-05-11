@@ -20,15 +20,24 @@ disease = {
 BMI={"18-29":22.5,"30-39":29.9,"40-49":24.9,"50-59":29.9,"60-70":30}
 Diet={"Normal":1900,"Under weight":2200,"Over weight":1700}
 
-symptoms = ["Fever","Stomach pain","Jaundice","Cough","Chill"]
-predictedDisease = []
+def diseasePrediction(symptoms):
+    pdisease = []
 
-for i in disease:
-    for j in disease[i]:
-        for k in symptoms:
-            if i in predictedDisease:
-                continue
-            if j == k:
-                predictedDisease.append(i)
+    for i in disease:
+        for j in disease[i]:
+            for k in symptoms:
+                if j == k:
+                    pdisease.append(i)
+    x = {}
+    for i in pdisease:
+        x[pdisease.count(i)] = i
 
-print(predictedDisease)
+    y = list(x.keys())
+
+    z = max(y)
+
+    predictedDisease = x[z] 
+
+    return predictedDisease
+
+# print(diseasePrediction(["Fever","Stomach pain","Jaundice","Cough","Chill"]))
