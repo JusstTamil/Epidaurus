@@ -28,17 +28,14 @@ def getDetails():
     # getting name
     Label(window, text='Name :').place(x=220, y=100+20)
     nameInput = Entry(window, width=50)
-    nameInput.insert(0,"Enter your Name")
     nameInput.place(x=270, y=100+20)
     # getting age
     Label(window, text='Age :').place(x=220, y=150+20)
     ageInput = Entry(window, width=50)
-    ageInput.insert(0,"Enter your Age")
     ageInput.place(x=270, y=150+20)
     # getting blood group
     Label(window, text='Blood Group :').place(x=220, y=250+20)
     bgInput = Entry(window, width=41)
-    bgInput.insert(0,"Enter your Blood Group")
     bgInput.place(x=320, y=250+20)
     # getting gender
     Label(window, text="Gender :").place(x=220, y=200+20)
@@ -116,10 +113,9 @@ def createSevereSymptoms(createdSymptomsCanvas):
     Button(createdSymptomsCanvas, text='<- Previous Part', bg='#1c3599', fg='#ecf0f3', width=20, padx=10, pady=10, activeforeground='#fff', activebackground='#000', command=lambda:createCommonSymptoms(createdSymptomsCanvas)).grid(column=0, row=5, padx=2, pady=2)
     Button(createdSymptomsCanvas, text='Submit', bg='#000', fg='#ecf0f3', width=20, padx=5, pady=5, command=patientHistory).grid(column=3 , row=5, padx=2, pady=2)
 
-predictedDisease = diseasePrediction(symptoms)
-
 def patientHistory():
-    global name, age, dob, gender, bloodGroup
+    global name, age, dob, gender, bloodGroup, predictedDisease
+    predictedDisease = diseasePrediction(symptoms)
     clearFrame(window)
     createCanvas()
     c.create_text(400, 50-20,text="Patient History",font=('Bookman Old Style',30), fill='#ecf0f3')
