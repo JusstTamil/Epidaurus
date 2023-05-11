@@ -24,7 +24,6 @@ def getDetails():
     clearFrame(window)
     createCanvas()
     global nameInput, ageInput, bgInput, genderInput, dobInput
-    #Label(window, text='Details', font=('Bookman Old Style', 30), fg='#000', bg='#ecf0f3').place(x=315, y=25+20)
     c.create_text(400,50+20,text='Details',font=('Bookman Old Style',30), fill='#ecf0f3')
     # getting name
     Label(window, text='Name :').place(x=220, y=100+20)
@@ -117,60 +116,54 @@ def createSevereSymptoms(createdSymptomsCanvas):
     Button(createdSymptomsCanvas, text='<- Previous Part', bg='#1c3599', fg='#ecf0f3', width=20, padx=10, pady=10, activeforeground='#fff', activebackground='#000', command=lambda:createCommonSymptoms(createdSymptomsCanvas)).grid(column=0, row=5, padx=2, pady=2)
     Button(createdSymptomsCanvas, text='Submit', bg='#000', fg='#ecf0f3', width=20, padx=5, pady=5, command=patientHistory).grid(column=3 , row=5, padx=2, pady=2)
 
+predictedDisease = diseasePrediction(symptoms)
+
 def patientHistory():
     global name, age, dob, gender, bloodGroup
     clearFrame(window)
     createCanvas()
-    c.create_text(400, 50,text="Patient History",font=('Bookman Old Style',30), fill='#ecf0f3')
+    c.create_text(400, 50-20,text="Patient History",font=('Bookman Old Style',30), fill='#ecf0f3')
     # name
-    Label(window, text='Name').place(x=220, y=100)
-    nameOutput = Entry(window, width=50)
-    nameOutput.place(x=300, y=100)
-    nameOutput.insert(0, name)
-    nameOutput.config(state=DISABLED)   
+    Label(window, text='Name', font=('Cambria')).place(x=70, y=100)
+    Label(window, text=str(name), wraplength=300, width=50, font=('Cambria')).place(x=250, y=100-20)   
     # age
-    Label(window, text='Age').place(x=220, y=150)
-    ageOutput = Entry(window, width=50)
-    ageOutput.place(x=300, y=150)
-    ageOutput.insert(0, age)
-    ageOutput.config(state=DISABLED)
+    Label(window, text='Age', font=('Cambria')).place(x=70, y=150)
+    Label(window, text=str(age), wraplength=300, width=50, font=('Cambria')).place(x=250, y=150-20)
     # date of birth
-    Label(window, text='Date of Birth').place(x=220, y=200)
-    dobOutput = Entry(window, width=50)
-    dobOutput.place(x=300, y=200)
-    dobOutput.insert(0, dob)
-    dobOutput.config(state=DISABLED)
+    Label(window, text='Date of Birth', font=('Cambria')).place(x=70, y=200)
+    Label(window, text=str(dob), wraplength=300, width=50, font=('Cambria')).place(x=250, y=200-20)
     # gender
-    Label(window, text='Gender').place(x=220, y=250)
-    genderOutput = Entry(window, width=50)
-    genderOutput.place(x=300, y=250)
-    genderOutput.insert(0, gender)
-    genderOutput.config(state=DISABLED)
+    Label(window, text='Gender', font=('Cambria')).place(x=70, y=250)
+    Label(window, text=str(gender), wraplength=300, width=50, font=('Cambria')).place(x=250, y=250-20)
     # Blood Group
-    Label(window, text='Blood Group').place(x=220, y=300)
-    bgOutput = Entry(window, width=50)
-    bgOutput.place(x=300, y=300)
-    bgOutput.insert(0, bloodGroup)
-    bgOutput.config(state=DISABLED)
+    Label(window, text='Blood Group', font=('Cambria')).place(x=70, y=300)
+    Label(window, text=str(bloodGroup), wraplength=300, width=50, font=('Cambria')).place(x=250, y=300-20)
     #symptoms
-    Label(window, text='Symptoms').place(x=220, y=350)
-    symptomsOutput = Entry(window, width=50)
-    symptomsOutput.place(x=300, y=350)
-    symptomsOutput.insert(symptoms)
-    symptomsOutput.config(state=DISABLED)
+    Label(window, text='Symptoms', font=('Cambria')).place(x=70, y=350)
+    Label(window, text= str(symptoms), wraplength=300, width=50, font=('Cambria')).place(x=250, y=350-20)
     # predicted Disease
+    Label(window, text='Predicted Diseases: ', font=('Cambria')).place(x=70, y=400)
+    Label(window, text=str(predictedDisease), wraplength=300, width=50, font=('Cambria')).place(x=250, y=400-20)
+    # go to home button
+    Button(window, text='Go to home', padx=2, pady=2, command=goHome).place(x=350, y=445)
 
+def goHome():
+    clearFrame(window)
+    home()
     
+def home():
+    global b
+    b=PhotoImage(file="bg.png")
+    c=Canvas(window, width=780,height=488)
+    c.pack(fill='both',expand=True)
+    c.create_image(0,0, anchor=NW, image=b)
+    c.create_text(400,100,text='EPIDAURUS',font=('Pristina',50 ,'bold'), fill='#ecf0f3')
 
-b=PhotoImage(file="bg.png")
-c=Canvas(window, width=780,height=488)
-c.pack(fill='both',expand=True)
-c.create_image(0,0, anchor=NW, image=b)
-c.create_text(400,100,text='EPIDAURUS',font=('Pristina',50 ,'bold'), fill='#ecf0f3')
+    Button(window, text='Sickness Analysis', background='#1c3599', fg="#ecf0f3", padx=10, pady=10, width=19, font=('Arial'), command=getDetails).place(x=300, y=180)
+    Button(window, text='Diets', background='#1c3599', fg="#ecf0f3", padx=10, pady=10, width=19, font=('Arial')).place(x=300, y=250)
+    Button(window, text='About', background='#1c3599', fg="#ecf0f3", padx=10, pady=10, width=19, font=('Arial')).place(x=300, y=320)
+    Label(window, text='Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusantium quae, libero amet architecto cumque, repellat, delectus cum eius maiores nisi dolor! Inventore suscipit repellat dolorum.', wraplength=781, bg='#000', fg='#fff').place(x=7, y=449)
 
-Button(window, text='Sickness Analysis', background='#1c3599', fg="#ecf0f3", padx=10, pady=10, width=19, font=('Arial'), command=getDetails).place(x=300, y=180)
-Button(window, text='Diets', background='#1c3599', fg="#ecf0f3", padx=10, pady=10, width=19, font=('Arial')).place(x=300, y=250)
-Button(window, text='About', background='#1c3599', fg="#ecf0f3", padx=10, pady=10, width=19, font=('Arial')).place(x=300, y=320)
-Label(window, text='Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusantium quae, libero amet architecto cumque, repellat, delectus cum eius maiores nisi dolor! Inventore suscipit repellat dolorum.', wraplength=781, bg='#000', fg='#fff').place(x=7, y=449)
+home()
 
 window.mainloop()
