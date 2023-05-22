@@ -1,43 +1,87 @@
-disease = {
-    'Typhoid':["High fever","Weakness","Stomach pain","Constipation","Headache","Loss of apetite"],
-    'Pneumonia':["Fever","Chills","Cough","Headache","Bluish lips and nails"],
-    'Dysentry':["Abdominal pain","Blood and mucus in the stool"],
-    'BPlague':["High fever", "Headache","Enlargement of axillary lymph nodes"],
-    'PPlague':["High fever", "Headache","Chest pain","Blood in sputum","Shortness of breath"],
-    'SPlague':["High fever","Extreme weakness","Skin turns black"],
-    'Diphtheria':["High fever","Suffocation"],
-    'Tetanus':["Contraction of voluntary muscles"],
-    'Common_Cold':["Nasal Congestion and discharge","Sore throat","Hoarseness","Cough"],
-    'Chikungunya':["Fever","Joint pain","Enlargement of lymph nodes"],
-    'Dengue':["Fever","Severe frontal headache","Pain in muscle and joints","Dizziness","Bleeding from mouth,nose and gums"],
-    'HepatitisB':["Jaundice","Fatigue","Nausea"],
-    'Malaria':["Vomiting","Bodyache","Fatigue","Shivering","Muscular pain"],
-    'Amoebiasis':["Constipation","Abdominal pain and cramps"],
-    'Ascariasis':["Internal bleeding","Anaemia","Muscular pain"],
-    'Ring_worms':["Dry","scaly lesions accompanied with itching"]
+common_symptoms={
+    "Fever":["Pneumonia","Chikungunya","Dengue"],
+    "High fever":["Typhoid","BPlague","PPlague","SPlague","Diphteria"],
+    "Stomach pain":["Typhoid"],
+    "Constipation":["Typhoid","Amoebiasis"],
+    "Headache":["Dengue","Pneumonia","BPlague","PPlague"],
+    "Chills":["Common cold","Pneumonia"],
+    "Cough":["Common cold","Pneumonia"],
+    "Tiredness":["Common cold","Pneumonia"],
+    "Sore throat":["Common cold"],
+    "Muscle & joint pain":["Chikungunya","Dengue","Ascariasias","Malaria"],
+    "Weakness":["Typhoid","SPlague"],
+    "Fatigue":["HepatitisB","Malaria"],
+    "Abdominal pain":["Dysentry","Amoebiasis"]
 }
 
-BMI={"18-29":22.5,"30-39":29.9,"40-49":24.9,"50-59":29.9,"60-70":30}
-Diet={"Normal":1900,"Under weight":2200,"Over weight":1700}
+delicate_symptoms={
+    "Loss of apetite":"Typhoid",
+    "Bluish lips & nails":"Pneumonia",
+    "Blood & mucus in stool":"Dysentry",
+    "Swellings in under arm region":"BPlague",
+    "Chest pain & shortness of breath":"PPlague",
+    "Skin turns black(suddenly)":"SPlague",
+    "Suffocation":"Diphteria",
+    "Contraction of voluntary muscles":"Tetanus",
+    "Nasal congestion & discharge":"Common cold",
+    "Swellings in body":"Chikungunya",
+    "Bleeding from mouth,nose & gum":"Dengue",
+    "Jaundice & nausea":"HepatitisB",
+    "Vomiting & shivering":"Malaria",
+    "Scaly lesions with itching":"Ring worms",
+}
+'''x=[]
+y=int(input("Enter no. of entries:"))
+z=""
+for a in range(y):
+    z=input("Enter the symptom:")
+    x.append(z)
+    z=""
+print(x)
+'''
 
-def diseasePrediction(symptoms):
-    pdisease = []
 
-    for i in disease:
-        for j in disease[i]:
-            for k in symptoms:
-                if j == k:
-                    pdisease.append(i)
-    x = {}
-    for i in pdisease:
-        x[pdisease.count(i)] = i
+#Similarity check
+def diseasePrediction(x):
+    predictcommon=list()
+    predictdelicate=[]
 
-    y = list(x.keys())
+    for i in x:
+        for j in common_symptoms:
+            if i==j:
+                predictcommon.extend(common_symptoms[j])
+        else:
+            for j in delicate_symptoms:
+                if i==j:
+                    predictdelicate.append(delicate_symptoms[j])
 
-    z = max(y)
-
-    predictedDisease = x[z] 
-
+    def find_common(list1, list2):
+        
+        common = []
+        for item in list1:
+            if item in list2:
+                common.append(item)
+        return common
+    
+    predictfinal=[]
+    predictfinal.extend(find_common(predictcommon,predictdelicate))
+    
+    def der(list):
+        global predictedDisease
+        predictedDisease = []
+        xsd=[]
+        jay={}
+        main=[]
+        for i in list:
+            jay[list.count(i)]=i
+        xsd.extend(jay.keys())
+        main.append(jay[max(xsd)])
+        return main 
+    pd = der(predictcommon)
+    pd.extend(predictfinal)
+    for i in pd:
+        if i in predictedDisease:
+            continue
+        else:
+            predictedDisease.append(i)
     return predictedDisease
-
-# print(diseasePrediction(["Fever","Stomach pain","Jaundice","Cough","Chill"]))
