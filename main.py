@@ -1,4 +1,3 @@
-
 from tkinter import *
 from tkinter import font
 import time
@@ -29,9 +28,6 @@ def new_win():
     window.resizable(width=False, height=False)
     window.iconbitmap('favicon.ico')
 
-
-    now = date.today().strftime('%d/%m/%y')
-    symptoms = []
 
     def clearFrame(e):
         for widget in e.winfo_children():
@@ -125,15 +121,8 @@ Note: You can get the source code of the application by clicking the below butto
                 value = 2
             )
             female_rb.place(x=415,y=225)
-
-
-                                                                                                
                 
             #Ujp the great
-
-
-
-
 
             def bmi_index(bmi):
                 #for males 
@@ -720,10 +709,6 @@ Note: You can get the source code of the application by clicking the below butto
 
                     else:
                         messagebox.showerror('bmi-Diets', 'wrong')
-                        
-
-
-
 
             def calculate_bmi():
                 kg = int(weight_tf.get())
@@ -732,8 +717,6 @@ Note: You can get the source code of the application by clicking the below butto
                 bmi = round(bmi, 1)
                 bmi_index(bmi)
 
-
-                        
             '''gen_lb = Label(
                 window,
                 text='Select Gender'
@@ -742,9 +725,6 @@ Note: You can get the source code of the application by clicking the below butto
 
             frame2 = Frame(c)
             frame2.place()
-
-
-
 
             '''height_lb = Label(
                 window,
@@ -813,9 +793,11 @@ Note: You can get the source code of the application by clicking the below butto
     
     def addSymptoms(symptom):
         symptoms.append(symptom)
+        e = len(symptomDisplay.get())
+        symptomDisplay.insert(e, symptom + ', ')
 
     def sicknessAnalysis():
-        global name, age, bloodGroup, dob, gender
+        global name, age, bloodGroup, dob, gender, symptomDisplay
         name = nameInput.get()
         age = ageInput.get()
         bloodGroup = bgInput.get()
@@ -824,9 +806,12 @@ Note: You can get the source code of the application by clicking the below butto
         clearFrame(window)
         createCanvas()
         c.create_text(415,50+20,text='Sickness Analysis',font=('Bookman Old Style',20,"bold"), fill='#ecf0f3')
-        Label(window, text='Please Select the Symptoms that you have been experiencing.').place(x=225, y= 90)
+        Label(window, text='Please Select the Symptoms that you have been experiencing. (For more accurate results, please select more than one)', wraplength=500).place(x=175, y= 100)
+        symptomDisplay = Entry(window, width=114)
+        symptomDisplay.place(x=40 ,y=160)
+        symptomDisplay.insert(0, 'Entered Symptoms : ')
         commonSymptoms=Canvas(window)
-        commonSymptoms.place(x=40, y=130)
+        commonSymptoms.place(x=40, y=200)
         createCommonSymptoms(commonSymptoms)
     
     def createCommonSymptoms(createdSymptomsCanvas):
@@ -911,7 +896,9 @@ Note: You can get the source code of the application by clicking the below butto
         home()
     
     def home():
-        global b
+        global b, now, symptoms
+        now = date.today().strftime('%d/%m/%y')
+        symptoms = []
         b=PhotoImage(file="bg.png")
         c=Canvas(window, width=780,height=488)
         c.pack(fill='both',expand=True)
@@ -922,7 +909,7 @@ Note: You can get the source code of the application by clicking the below butto
         Button(window, text='Diets', background='#589a59', fg="#ecf0f3", padx=10, pady=10, width=19, font=('Arial'),command=diets).place(x=300, y=250)
         Button(window, text='About', background='#d2150d', fg="#ecf0f3", padx=10, pady=10, width=19, font=('Arial'),command=opennewwindow).place(x=300, y=320)
         Label(window, text='''DISCLAIMER:
-All our results are purely based on statistical analysis and prediction,it may be wrong in some rare cases,so we request you not to take it too serious.If any of those symptoms sustain for a long period of time please consult your medical adviser.''', wraplength=775, bg='#000', fg='#fff').place(x=25, y=430)
+All our results are purely based on statistical analysis and prediction,it may be wrong in some rare cases,so we request you not to take it too serious.If any of those symptoms sustain for a long period of time please consult your medical adviser.''', wraplength=775, bg='#000', fg='#fff').place(x=23, y=433)
 
     home()
 
@@ -980,3 +967,4 @@ for i in range(2): #no. of loops
 w.destroy()
 new_win()
 w.mainloop()
+
