@@ -22,3 +22,5 @@ This version also has a BMI claculator and a basic diet drafter for every age gr
 The next version of Epidaurus will have a mechanism which will leverage data from a database developed and maintained by renowned institutions. We make it an API which developers can use in their projects.
 
 ### Join us in Creating the Pinnacle of Medical Industry!!!
+
+**We are conducting a survey to know your opinions on AI treating you. [Attend the Survey](https://docs.google.com/forms/d/e/1FAIpQLSdTZZVnd1DfPb8Yp-muDY5Jq9ucX-kR_mwjmZAAIxsLaeglpQ/viewform) and let us know about your opinions.**
